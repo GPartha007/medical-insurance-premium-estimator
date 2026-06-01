@@ -81,6 +81,7 @@ pip install -r requirements.txt
 ### Developed by
 
 Partha Sarathi Guha
+<br>
 Data Analyst | Data Science Enthusiast | Python Developer
 
 ### Connect With Me
