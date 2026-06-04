@@ -36,8 +36,6 @@ Regression
 
 ### 🛠️ Business oriented metrics:
 
-### 📌 Metrics logging: 
-MLflow
 
 ### 💻 End Product Layout: 
 A web platform where a user enters their age, BMI, and habits, and the system outputs an estimated annual premium in dollars (e.g., "$4,250 / year").
@@ -54,7 +52,7 @@ Streamlit
 ### Clone Repository
 
 ```bash
-git clone url-goes-here
+git clone https://github.com/GPartha007/medical-insurance-premium-estimator.git
 cd medical-insurance-premium-estimator
 ```
 
