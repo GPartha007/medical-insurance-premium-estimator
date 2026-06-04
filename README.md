@@ -44,6 +44,7 @@ A web platform where a user enters their age, BMI, and habits, and the system ou
 Streamlit
 
 ### 🔗 Deployed app link:
+[https://medical-insurance-premium-estimator-app.onrender.com/](https://medical-insurance-premium-estimator-app.onrender.com/)
 
 ---
 
