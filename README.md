@@ -206,6 +206,7 @@ __Concerns__
 
 The most important business takeaway is that the model has strong explanatory power __(R² ≈ 83%)__ but relatively high pricing error __(MAPE ≈ 41%)__. It is valuable as a ___decision-support___ and ___quote-generation___ tool, but additional features (e.g., region, gender, medical history, dependents, occupation, coverage type) would likely be needed before using it as the sole engine for premium pricing.
 
+---
 
 ### 💻 End Product Layout: 
 A web platform where a user enters their age, BMI, and habits, and the system outputs an estimated annual premium in dollars (e.g., "$4,250 / year").
