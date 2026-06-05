@@ -32,9 +32,179 @@ Regression
 
 ---
 
-### 🧐 Internal model metrics:
+### 🧐 Internal model metrics (Data Science / Model Performance)
 
-### 🛠️ Business oriented metrics:
+These metrics help the analytics team evaluate model quality.
+
+- __Out-of-Bag Score:__ 0.804
+- __Mean Absolute Error:__ 2784.35
+- __Mean Absolute Percentage Error:__ 41%
+- __Mean Squared Error:__ 26343303.974
+- __R-squared:__ 0.827
+- __Adj. R-squared:__ 0.824
+
+### Out-of-Bag Score = 0.804
+The model can explain approximately __80.4%__ of unseen observations during training. Indicates stable performance without requiring a separate validation dataset. Gives confidence that the model will behave similarly for new applicants.
+
+### R² = 0.827
+__82.7%__ of premium variation is explained by Age, BMI, and Smoker status. This means the selected factors are strong predictors of insurance cost. Age, BMI and smoking status should remain key underwriting variables.
+Business can justify premium differentiation based on these factors.
+
+### Adjusted R² = 0.824
+Very close to __R²__. The model is not artificially inflating performance because of unnecessary features. Current feature set is efficient. Additional variables should only be added if they bring significant predictive value.
+
+### MAE(Mean Absolute Error) = ₹2,784.35
+On average, predicted premium differs from actual premium by __₹2,784__.
+Suppose average premium is __₹15,000__. Then,
+
+__Error:__ ₹2,784 / ₹15,000 ≈ __18.5%__
+
+This means many customers may receive quotes within a few thousand rupees of the actual premium.
+
+__Decision Supported__<br>
+If Premium Range is __₹50,000__ - __₹100,000__. Error is relatively small. Model can be used directly.
+
+If Premium Range is __₹5,000__ – __₹15,000__. Error is substantial. Human review may still be required.
+
+
+### MAPE(Mean Absolute Percentage Error) = 41%
+Predictions are off by __41%__ on average. This is the most concerning metric.
+
+__For example:__<br>
+Actual Premium = ₹10,000
+
+Predicted Premium may be:
+- ₹5,900
+- ₹14,100
+
+A large difference for customers.
+
+__Decision Supported__
+- Avoid fully automated premium pricing.
+- Use model as a decision-support tool.
+- Improve feature engineering before production rollout.
+
+__Business Risk__
+
+- __Underpricing Risk__<br>
+  Actual Premium = ₹20,000<br>
+  Predicted = ₹12,000<br>
+  _Company loses revenue._
+
+- __Overpricing Risk__<br>
+  Actual Premium = ₹20,000<br>
+  Predicted = ₹28,000<br>
+  _Customer may move to competitors._
+
+
+### MSE(Mean Square Error) = 26,343,303.97
+Some customers experience very large prediction errors. Because __MSE__ squares errors, it highlights extreme misses.
+
+Likely causes:
+- Very high-risk smokers
+- Customers with extremely high BMI
+- Outlier premium values
+
+__Decision Supported__
+- Create separate models for high-risk groups.
+- Introduce risk segmentation.
+
+__Example:__
+- Low-risk customers
+- Medium-risk customers
+- High-risk customers
+
+This often improves pricing accuracy.
+
+---
+
+### 🛠️ Business oriented metrics (Executive / Insurance Perspective):
+These are the metrics executives care about.
+
+### Premium Prediction Accuracy
+
+__Derived from:__<br>
+MAPE = 41%
+
+__Insight__<br>
+Approximate prediction accuracy:<br>
+100 − 41 = 59%
+
+__Business Interpretation__<br>
+Current pricing accuracy is around __59%__.
+
+__Decision__
+
+Suitable for:
+- Initial quote generation
+- Customer self-service portals
+
+Not ideal for:
+- Final premium determination
+- Regulatory reporting
+
+
+### Revenue Leakage Risk
+
+__Derived from:__ MAE and MAPE
+
+__Insight__<br>
+Underestimated premiums create revenue loss.
+
+__Business Impact__<br>
+Example:<br>
+10,000 policies × ₹2,784 average error<br>
+Potential pricing exposure:<br>
+__≈ ₹27.8 million__
+
+__Decision__<br>
+Monitor underprediction rates carefully.
+
+
+### Customer Retention Risk
+
+__Derived from:__ MAPE
+
+__Insight__<br>
+Overestimated premiums may discourage purchases.
+
+__Business Impact__
+- Customers compare insurance providers.
+- An inflated quote can directly reduce conversion.
+
+__Decision__<br>
+Use confidence intervals around predictions.
+
+__Example:__<br>
+Predicted Premium: __₹18,000 ± ₹2,500__<br>
+instead of a single value.
+
+---
+
+## Executive Summary
+__Strengths__
+
+✅ Model explains __~83%__ of premium variability.
+
+✅ Generalizes well __(OOB = 0.804)__.
+
+✅ Features are meaningful and not overfitting.
+
+✅ Suitable for __quote estimation__ and __underwriting support__.
+
+__Concerns__
+
+⚠️ Average percentage error is __41%__.
+
+⚠️ Some customers experience ___large prediction errors___.
+
+⚠️ Financial risk exists from underpricing and overpricing.
+
+⚠️ Not yet reliable enough for __fully automated premium determination__.
+
+---
+
+The most important business takeaway is that the model has strong explanatory power __(R² ≈ 83%)__ but relatively high pricing error __(MAPE ≈ 41%)__. It is valuable as a ___decision-support___ and ___quote-generation___ tool, but additional features (e.g., region, gender, medical history, dependents, occupation, coverage type) would likely be needed before using it as the sole engine for premium pricing.
 
 
 ### 💻 End Product Layout: 
